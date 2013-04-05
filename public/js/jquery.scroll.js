@@ -102,7 +102,7 @@ NAVY.Scroll.prototype = {
         if(wrapperObj.css('position') === 'static'){
             wrapperObj.css('position','relative');
         }
-        $('<div class="scrollWrapper"><div class="scrollContent" style="height: '+this.scrollHeight+'px"></div></div>').appendTo(wrapperObj);
+        wrapperObj.css({'overflow':'hidden'}).append('<div class="scrollWrapper"><div class="scrollContent" style="height: '+this.scrollHeight+'px"></div></div>');
         this.scrollWrapperObj = wrapperObj.find('.scrollWrapper');
         this.scrollObj = this.scrollWrapperObj.find('.scrollContent');
         return this;
