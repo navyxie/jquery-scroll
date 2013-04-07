@@ -8,10 +8,13 @@
  */
 var NAVY = NAVY || {};
 NAVY.Scroll = function(jqObj,wrapperObj,options){
-    this.jqObj = $(jqObj);//内容对象
     this.wrapperObj = $(wrapperObj);//内容对象容器对象
-    this.wrapperObjHeight = wrapperObj.outerHeight();//容器对象的高度
-    this.jqObjHeight = jqObj.outerHeight();//内容对象的高度
+    this.jqObj = this.wrapperObj.find(jqObj);//内容对象
+    this.wrapperObjHeight = this.wrapperObj.outerHeight();//容器对象的高度
+    this.jqObjHeight = this.jqObj.outerHeight();//内容对象的高度
+    if(this.wrapperObj.css('overflow') !== 'hidden'){
+        this.wrapperObj.addClass('scrollOverFlow');
+    }
     if(this.wrapperObjHeight >= this.jqObjHeight){
         //若内容对象高度小于容器对象高度则返回
         return false;
@@ -102,7 +105,7 @@ NAVY.Scroll.prototype = {
         if(wrapperObj.css('position') === 'static'){
             wrapperObj.css('position','relative');
         }
-        wrapperObj.css({'overflow':'hidden'}).append('<div class="scrollWrapper"><div class="scrollContent" style="height: '+this.scrollHeight+'px"></div></div>');
+        wrapperObj.append('<div class="scrollWrapper"><div class="scrollContent" style="height: '+this.scrollHeight+'px"></div></div>');
         this.scrollWrapperObj = wrapperObj.find('.scrollWrapper');
         this.scrollObj = this.scrollWrapperObj.find('.scrollContent');
         return this;
